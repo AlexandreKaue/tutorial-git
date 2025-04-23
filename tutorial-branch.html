@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Git - Trabalhando com Commits e Branches</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h2 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        code {
+            font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+            background-color: rgba(27,31,35,.05);
+            border-radius: 3px;
+            font-size: 85%;
+            padding: 0.2em 0.4em;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        ul {
+            padding-left: 2em;
+        }
+        .tip {
+            background-color: #f8f9fa;
+            border-left: 4px solid #2cbe4e;
+            padding: 0.8em;
+            margin: 1em 0;
+        }
+        .warning {
+            background-color: #fff5b1;
+            border-left: 4px solid #f9c513;
+            padding: 0.8em;
+            margin: 1em 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tutorial Git - Trabalhando com Commits e Branches</h1>
+    
+    <p>Este guia prático ensina como trabalhar eficientemente com commits e branches no Git, duas funcionalidades essenciais para desenvolvimento colaborativo.</p>
+    
+    <h2>Trabalhando com Commits</h2>
+    
+    <p>Um commit representa um conjunto de alterações que você fez no código. É como um "ponto de salvamento" do seu trabalho.</p>
+    
+    <h3>Como fazer commits</h3>
+    
+    <ol>
+        <li>
+            <p><strong>Verificar o status</strong> dos arquivos modificados:</p>
+            <pre><code>git status</code></pre>
+        </li>
+        
+        <li>
+            <p><strong>Adicionar arquivos</strong> para o próximo commit:</p>
+            <pre><code># Adicionar arquivo específico
+git add nome-do-arquivo.extensao
+
+# Adicionar todos os arquivos modificados
+git add .
+
+# Adicionar múltiplos arquivos
+git add arquivo1.txt arquivo2.js pasta/arquivo3.css</code></pre>
+        </li>
+        
+        <li>
+            <p><strong>Criar o commit</strong> com uma mensagem descritiva:</p>
+            <pre><code>git commit -m "Descrição clara das alterações feitas"</code></pre>
+        </li>
+        
+        <li>
+            <p><strong>Enviar os commits</strong> para o repositório remoto:</p>
+            <pre><code>git push origin nome-do-branch</code></pre>
+        </li>
+    </ol>
+    
+    <h3>Boas práticas para commits</h3>
+    
+    <ul>
+        <li>Faça commits <strong>pequenos e frequentes</strong>, focados em uma única alteração lógica</li>
+        <li>Escreva mensagens de commit <strong>claras e descritivas</strong></li>
+        <li>Use verbos no <strong>imperativo presente</strong>: "Adiciona", "Corrige", "Atualiza" (não "Adicionado", "Corrigido")</li>
+        <li>Estrutura recomendada para mensagens:
+            <pre><code>Resumo curto (até 50 caracteres)
+
+Descrição mais detalhada explicando o "por quê" da mudança,
+não o "como" (já que o código mostra isso).</code></pre>
+        </li>
+    </ul>
+    
+    <div class="tip">
+        <p><strong>Dica:</strong> Use <code>git commit -am "mensagem"</code> para adicionar e fazer commit de todos os arquivos modificados (não funciona para arquivos novos ainda não rastreados).</p>
+    </div>
+    
+    <h3>Visualizar histórico de commits</h3>
+    
+    <pre><code># Ver histórico simples
+git log
+
+# Ver histórico resumido e visualmente formatado
+git log --oneline --graph --decorate
+
+# Ver histórico de um arquivo específico
+git log -- nome-do-arquivo.extensao</code></pre>
+    
+    <h2>Trabalhando com Branches</h2>
+    
+    <p>Branches são "ramificações" independentes do código que permitem desenvolver funcionalidades sem afetar o código principal.</p>
+    
+    <h3>Gerenciando branches</h3>
+    
+    <ol>
+        <li>
+            <p><strong>Listar branches</strong> existentes:</p>
+            <pre><code># Listar branches locais
+git branch
+
+# Listar todos os branches (locais e remotos)
+git branch -a</code></pre>
+        </li>
+        
+        <li>
+            <p><strong>Criar um novo branch</strong>:</p>
+            <pre><code># Criar branch
+git branch nome-do-novo-branch
+
+# Criar e já mudar para o novo branch
+git checkout -b nome-do-novo-branch</code></pre>
+            
+            <p>No Git mais recente, você também pode usar:</p>
+            <pre><code>git switch -c nome-do-novo-branch</code></pre>
+        </li>
+        
+        <li>
+            <p><strong>Mudar para outro branch</strong>:</p>
+            <pre><code># Método tradicional
+git checkout nome-do-branch
+
+# Método mais recente
+git switch nome-do-branch</code></pre>
+        </li>
+        
+        <li>
+            <p><strong>Enviar branch para o repositório remoto</strong>:</p>
+            <pre><code>git push -u origin nome-do-branch</code></pre>
+            <p>O parâmetro <code>-u</code> (ou <code>--set-upstream</code>) configura o rastreamento entre o branch local e o remoto.</p>
+        </li>
+        
+        <li>
+            <p><strong>Excluir branch</strong>:</p>
+            <pre><code># Excluir branch local
+git branch -d nome-do-branch
+
+# Excluir branch local (forçado)
+git branch -D nome-do-branch
+
+# Excluir branch remoto
+git push origin --delete nome-do-branch</code></pre>
+        </li>
+    </ol>
+    
+    <h3>Integrando branches</h3>
+    
+    <h4>Método 1: Merge</h4>
+    
+    <p>O merge combina as alterações de um branch com outro:</p>
+    
+    <pre><code># Mude para o branch que receberá as alterações (geralmente main/master)
+git checkout main
+
+# Faça o merge do outro branch para o atual
+git merge nome-do-branch-a-integrar</code></pre>
+    
+    <div class="warning">
+        <p><strong>Atenção:</strong> O merge pode gerar conflitos se o mesmo arquivo tiver sido alterado em ambos os branches. Nesse caso, você precisará resolver manualmente os conflitos.</p>
+    </div>
+    
+    <h4>Método 2: Rebase</h4>
+    
+    <p>O rebase reaplica seus commits sobre outra base, criando um histórico mais linear:</p>
+    
+    <pre><code># Estando no seu branch de trabalho
+git rebase main
+
+# Depois, vá para o main e faça um merge (fast-forward)
+git checkout main
+git merge nome-do-branch</code></pre>
+    
+    <div class="warning">
+        <p><strong>Cuidado:</strong> Nunca faça rebase de branches públicos/compartilhados, apenas de branches locais que ainda não foram enviados ao repositório remoto.</p>
+    </div>
+    
+    <h3>Fluxo de trabalho com branches</h3>
+    
+    <p>Um fluxo de trabalho comum com Git:</p>
+    
+    <ol>
+        <li>Atualize seu branch principal: <code>git checkout main && git pull</code></li>
+        <li>Crie um branch para sua tarefa: <code>git checkout -b feature/nova-funcionalidade</code></li>
+        <li>Trabalhe, faça commits: <code>git add . && git commit -m "Implementa funcionalidade X"</code></li>
+        <li>Mantenha seu branch atualizado: <code>git fetch && git rebase origin/main</code></li>
+        <li>Envie seu branch para o remoto: <code>git push -u origin feature/nova-funcionalidade</code></li>
+        <li>Crie um Pull Request no GitHub ou plataforma similar</li>
+        <li>Após aprovação, faça o merge (na plataforma ou localmente)</li>
+    </ol>
+    
+    <h2>Resolvendo Conflitos</h2>
+    
+    <p>Conflitos ocorrem quando o Git não consegue integrar automaticamente alterações de diferentes branches.</p>
+    
+    <h3>Passos para resolver conflitos:</h3>
+    
+    <ol>
+        <li>
+            <p>O Git marcará os arquivos com conflitos. Abra-os e você verá algo como:</p>
+            <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+código da versão atual
+=======
+código da outra versão
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; nome-do-branch</code></pre>
+        </li>
+        
+        <li>Edite o arquivo para resolver o conflito (escolha uma versão ou combine ambas)</li>
+        
+        <li>Remova os marcadores (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>)</li>
+        
+        <li>Adicione o arquivo resolvido: <code>git add nome-do-arquivo</code></li>
+        
+        <li>Continue o merge ou rebase:
+            <pre><code># Se estiver em um merge
+git commit
+
+# Se estiver em um rebase
+git rebase --continue</code></pre>
+        </li>
+    </ol>
+    
+    <div class="tip">
+        <p><strong>Dica:</strong> Use ferramentas visuais para resolver conflitos mais facilmente: <code>git mergetool</code> ou IDEs como VSCode, IntelliJ, etc.</p>
+    </div>
+    
+    <h2>Comandos Git adicionais úteis</h2>
+    
+    <ul>
+        <li><strong>Ver diferenças</strong>: <code>git diff</code></li>
+        <li><strong>Desfazer modificações</strong>: <code>git checkout -- arquivo</code> ou <code>git restore arquivo</code></li>
+        <li><strong>Desfazer commits</strong>: <code>git reset HEAD~1</code> (mantém alterações) ou <code>git reset --hard HEAD~1</code> (descarta alterações)</li>
+        <li><strong>Salvar trabalho temporariamente</strong>: <code>git stash</code> e <code>git stash pop</code></li>
+        <li><strong>Ver configurações</strong>: <code>git config --list</code></li>
+    </ul>
+    
+    <h2>Conclusão</h2>
+    
+    <p>Dominar commits e branches é essencial para trabalhar eficientemente com Git. Pratique regularmente esses comandos e você se tornará mais confiante no controle de versão de seus projetos. Lembre-se que o Git foi projetado para facilitar o trabalho colaborativo e proteger seu código, então aproveite todos os seus recursos!</p>
+</body>
+</html>
